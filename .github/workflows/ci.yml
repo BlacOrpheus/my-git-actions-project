@@ -36,7 +36,7 @@ jobs:
       run: |
         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - name: Build the Docker image
-      run: docker build -t blacorpheus/demo-app
+      run: docker build -t my-git-actions-project:latest
       
     - name: Docker Push
       run: docker push blacorpheus/demo-app
