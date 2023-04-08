@@ -28,18 +28,26 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
       
-    - uses: actions/checkout@v3
-    - name: docker login
-      env:
-        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-      run: |
-        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-    - name: Build the Docker image
-      run: docker build -t java-app .
+    - name: Build and Push Docker Image
+      uses: mr-smithers-excellent/docker-build-push@v4
+      with:
+        image: blacorpheus/demo-app
+        registry: docker.io
+        username: ${{ secrets.DOCKER_USERNAME }}
+        password: ${{ secrets.DOCKER_PASSWORD }}
       
-    - name: Docker Push
-      run: docker tag java-app demo-app:java-1.0  
+#     - uses: actions/checkout@v3
+#     - name: docker login
+#       env:
+#         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+#         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+#       run: |
+#         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+#     - name: Build the Docker image
+#       run: docker build -t java-app .
+      
+#     - name: Docker Push
+#       run: docker tag java-app demo-app:java-1.0  
       
 #       # Build the image
 # docker build -t my-username/my-image:latest .
