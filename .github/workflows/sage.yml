@@ -33,7 +33,7 @@ jobs:
       run: ./gradlew build
 
     - name: Build and Push Docker Image
-      uses: mr-smithers-excellent/docker-build-push@v4
+      uses: rossmaclean/docker-build-push-action@v4
       with:
         image: blacorpheus/demo-app
         registry: docker.io
