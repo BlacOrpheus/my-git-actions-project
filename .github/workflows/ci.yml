@@ -36,8 +36,17 @@ jobs:
       run: |
         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
     - name: Build the Docker image
-      run: docker build . --file Dockerfile --tag  blacorpheus/my-git-actions-project:$(date +%s)
+      run: docker build -t nanuchi/my-project
       
     - name: Docker Push
       run: docker push blacorpheus/demo-app
+      
+#       # Build the image
+# docker build -t my-username/my-image:latest .
+
+# # Log in to the Docker registry
+# docker login
+
+# # Push the image to the registry
+# docker push my-username/my-image:latest
          
