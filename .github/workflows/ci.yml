@@ -28,49 +28,18 @@ jobs:
     - name: Build with Gradle
       run: ./gradlew build
       
-    - name: Set up QEMU
-      uses: docker/setup-qemu-action@v2
-    
-    - name: Set up Docker Buildx
-      uses: docker/setup-buildx-action@v2
+    - uses: actions/checkout@v3
+    - name: docker login
+      env:
+        DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
+        DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
+      run: |
+        docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
+    - name: Build the Docker image
+      run: docker build -t java-app .
       
-    - name: Login to Docker Hub
-      uses: docker/login-action@v2
-      with:
-        username: blacorpheus
-        password: Chidubem1995
-      
-    - name: Build and push
-      uses: docker/build-push-action@v4
-      with:
-        push: true
-        tags: blacorpheus/demo-app:latest
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-      
-
-#     - uses: actions/checkout@v3
-#     - name: docker login
-#       env:
-#         DOCKER_USERNAME: ${{secrets.DOCKER_USERNAME}}
-#         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
-#       run: |
-#         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-#     - name: Build the Docker image
-#       run: docker build -t my-git-actions-project:latest
-      
-#     - name: Docker Push
-#       run: docker push blacorpheus/demo-app
+    - name: Docker Push
+      run: docker tag java-app demo-app:java-1.0  
       
 #       # Build the image
 # docker build -t my-username/my-image:latest .
@@ -78,6 +47,6 @@ jobs:
 # # Log in to the Docker registry
 # docker login
 
-# # Push the image to the registry
-# docker push my-username/my-image:latest
+# # # Push the image to the registry
+# # docker push my-username/my-image:latest
          
