@@ -39,5 +39,5 @@ jobs:
 #       run: docker build . --file Dockerfile --tag  nanuchi/my-project:$(date +%s)
       
     - name: Docker Push
-      run: docker push ${{secrets.DOCKER_USERNAME}}/demo-app
+      run: docker push blacorpheus/demo-app
          
