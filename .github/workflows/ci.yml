@@ -35,9 +35,9 @@ jobs:
         DOCKER_PASSWORD: ${{secrets.DOCKER_PASSWORD}}
       run: |
         docker login -u $DOCKER_USERNAME -p $DOCKER_PASSWORD
-#     - name: Build the Docker image
-#       run: docker build . --file Dockerfile --tag  nanuchi/my-project:$(date +%s)
+    - name: Build the Docker image
+      run: docker build . --file Dockerfile --tag  BlacOrpheus/my-git-actions-project:$(date +%s)
       
     - name: Docker Push
-      run: docker push blacorpheus/my-git-actions-project
+      run: docker push blacorpheus/demo-app
          
